@@ -7,8 +7,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: NextRequest) {
-  const { genres, mood, language, favorites, timeframe, count } =
-    await req.json();
+  const { genres, mood, language, timeframe, count } = await req.json();
 
   try {
     const prompt = `
@@ -20,11 +19,10 @@ export async function POST(req: NextRequest) {
     ---
 
     User Preferences:
-    Genres: ${genres?.length ? genres.join(", ") : "Any"}
-    Mood/Theme: ${mood || "Any"}
-    Preferred Language: ${language || "Any"}
-    Favorite Actors/Directors: ${favorites || "None"}
-    Release Timeframe: ${timeframe || "Any"}
+    genres: ${genres?.length ? genres.join(", ") : "Any"}
+    mood/theme: ${mood || "Any"}
+    preferred language: ${language || "Any"}
+    release timeframe: ${timeframe || "Any"}
 
     ---
 
@@ -40,7 +38,6 @@ export async function POST(req: NextRequest) {
     genres: Action, Sci-Fi
     mood: Mind-bending plots
     language: English
-    favorites: Christopher Nolan
     release timeframe: Last 10 years
     count: 5
 
@@ -48,15 +45,14 @@ export async function POST(req: NextRequest) {
     ["Tenet", "Interstellar", "Inception", "The Prestige", "Blade Runner 2049"]
 
     Example Input-2:
-    genres: Action, Sci-Fi
-    mood: Mind-bending plots
-    language: English
-    favorites: Christopher Nolan
-    release timeframe: Last 10 years
-    count: 2
+    genres: Sci-Fi
+    mood: Feel-good movies
+    language: Hindi
+    release timeframe": Last 10 years
+    count: 3
     
     Example Output-2:
-    ["Everything Everywhere All at Once", "Parasite"]
+    ["PK", "3 Idiots", "Koi... Mil Gaya"]
 
     Start your response below with the array.
     `;
