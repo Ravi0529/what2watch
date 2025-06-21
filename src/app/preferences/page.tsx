@@ -76,7 +76,7 @@ export default function PreferencesPage() {
       });
 
       const suggestedTitles = response.data?.suggestedTitles;
-      console.log("Movie Suggestions:", suggestedTitles);
+      // console.log("Movie Suggestions:", suggestedTitles);
 
       localStorage.setItem("suggestedTitles", JSON.stringify(suggestedTitles));
       router.push("/movies");
