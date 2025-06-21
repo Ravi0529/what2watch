@@ -82,7 +82,8 @@ export async function POST(req: NextRequest) {
       }
 
       suggestedTitles = JSON.parse(aiContent);
-    } catch (err) {
+    } catch (error) {
+      console.log(error);
       console.error("Failed to parse OpenAI response:", aiResponse);
       return NextResponse.json(
         { error: "Failed to parse movie suggestions" },
