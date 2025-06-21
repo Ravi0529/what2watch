@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 
 interface Movie {
   Title: string;
@@ -87,10 +88,12 @@ export default function MoviesPage() {
             key={movie.Title}
             className="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden flex flex-col"
           >
-            <img
+            <Image
               src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.jpg"}
               alt={movie.Title}
-              className="w-full h-full object-cover object-center bg-white px-2 rounded-2xl"
+              width={400}
+              height={600}
+              className="w-full h-72 object-cover"
             />
             <CardContent className="px-2 md:p-4 space-y-1 flex-1 flex flex-col">
               <h2 className="md:text-xl font-semibold text-gray-900">
