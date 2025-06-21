@@ -200,7 +200,7 @@ export default function PreferencesPage() {
                   <SelectValue placeholder="How many movies?" />
                 </SelectTrigger>
                 <SelectContent className="bg-white border border-gray-200 text-gray-900">
-                  {[2, 3, 5, 10, 15].map((val) => (
+                  {[5, 10, 15, 20, 25].map((val) => (
                     <SelectItem
                       key={val}
                       value={val.toString()}

@@ -93,7 +93,7 @@ export default function MoviesPage() {
               alt={movie.Title}
               width={400}
               height={600}
-              className="w-full h-72 object-cover"
+              className="w-full object-cover px-2 rounded-2xl h-full"
             />
             <CardContent className="px-2 md:p-4 space-y-1 flex-1 flex flex-col">
               <h2 className="md:text-xl font-semibold text-gray-900">
