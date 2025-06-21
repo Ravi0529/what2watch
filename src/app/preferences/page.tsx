@@ -12,7 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 import { Clapperboard } from "lucide-react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const GENRES = [
   "Action",
@@ -60,15 +63,29 @@ export default function PreferencesPage() {
   const [releaseTimeframe, setReleaseTimeframe] = useState<string>("");
   const [count, setCount] = useState<number>(5);
 
-  const handleSubmit = () => {
-    // TODO: Submit to /api/user-preferences
-    console.log({
-      genres,
-      mood,
-      language,
-      releaseTimeframe,
-      count,
-    });
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("/api/user-preferences", {
+        genres,
+        mood,
+        language,
+        timeframe: releaseTimeframe,
+        count,
+      });
+
+      const suggestedTitles = response.data?.suggestedTitles;
+      console.log("Movie Suggestions:", suggestedTitles);
+
+      localStorage.setItem("suggestedTitles", JSON.stringify(suggestedTitles));
+      router.push("/movies");
+
+      toast.success("Searching Movies...");
+    } catch (error) {
+      console.error("Failed to get movie suggestions:", error);
+      toast.error("Something went wrong while fetching movie recommendations.");
+    }
   };
 
   return (
