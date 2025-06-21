@@ -49,56 +49,60 @@ export default function MoviesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0f0f11] text-white">
-        <Loader2 className="w-8 h-8 animate-spin" />
-        <span className="ml-2 text-lg">Fetching movie recommendations...</span>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white to-yellow-50 text-gray-900">
+        <Loader2 className="w-8 h-8 animate-spin text-yellow-500" />
+        <span className="ml-2 text-lg mt-2">
+          Fetching movie recommendations...
+        </span>
       </div>
     );
   }
 
   if (!movies.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0f0f11] text-white text-xl">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-yellow-50 text-gray-500 text-xl">
         No recommendations found.
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f11] text-white py-10 px-4">
-      <div className="flex items-center justify-between max-w-6xl mx-auto mb-6 px-2">
+    <div className="min-h-screen bg-gradient-to-br from-white to-yellow-50 text-gray-900 py-10 px-2 md:px-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between max-w-6xl mx-auto mb-6 px-2 gap-4 sm:gap-0">
         <Button
           variant="outline"
-          className="bg-[#1c1c24] border border-[#333] text-white hover:bg-[#2a2a35]"
+          className="bg-white border border-gray-300 text-gray-900 hover:bg-yellow-50 shadow-sm font-semibold"
           onClick={() => router.back()}
         >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
+          <ArrowLeft className="h-4 w-4 text-yellow-500" />
         </Button>
-        <h1 className="text-2xl sm:text-3xl font-bold text-center w-full -ml-12 sm:-ml-16">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center w-full sm:w-auto">
           🎬 Recommended Movies
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {movies.map((movie) => (
           <Card
             key={movie.Title}
-            className="bg-[#1c1c24] border border-[#2a2a2a] rounded-xl shadow-md overflow-hidden"
+            className="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden flex flex-col"
           >
             <img
               src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.jpg"}
               alt={movie.Title}
-              className="w-full h-72 object-cover"
+              className="w-full h-full object-cover object-center bg-white px-2 rounded-2xl"
             />
-            <CardContent className="p-4 space-y-2">
-              <h2 className="text-xl font-semibold">
-                {movie.Title} ({movie.Year})
+            <CardContent className="px-2 md:p-4 space-y-1 flex-1 flex flex-col">
+              <h2 className="md:text-xl font-semibold text-gray-900">
+                {movie.Title}{" "}
+                <span className="font-normal text-gray-500">
+                  ({movie.Year})
+                </span>
               </h2>
-              <p className="text-sm text-gray-400">{movie.Genre}</p>
-              <p className="text-sm">{movie.Plot}</p>
-              <p className="text-sm text-yellow-400">
-                IMDb: ⭐ {movie.imdbRating}
+              <p className="text-xs md:text-sm text-gray-500">{movie.Genre}</p>
+              <p className="text-xs md:text-sm text-yellow-600 font-semibold mt-2">
+                IMDb:{" "}
+                <span className="align-middle">⭐ {movie.imdbRating}</span>
               </p>
             </CardContent>
           </Card>
